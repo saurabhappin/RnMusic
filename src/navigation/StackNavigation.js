@@ -8,6 +8,9 @@ import Playlist from '../screens/PlaylistScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import MyTabs from './TabNavigation';
 import Home from '../screens/HomeScreen';
+import { Lottie } from '../screens/LottieAnimations';
+import { Playground } from '../screens/playgroundOptions';
+import { Reanimated1 } from '../screens/Reanimated1';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +28,38 @@ export default function StackNavigationManager() {
           component={MyTabs}
           options={{
             headerShown: false,
+            animationEnabled: false,
+            animationTypeForReplace: 'pop',
+          }}
+        />
+        <Stack.Screen
+          name="Animation"
+          component={Lottie}
+          options={{
+            headerShown: true,
+            animationEnabled: false,
+            animationTypeForReplace: 'pop',
+          }}
+        />
+        <Stack.Screen
+          name="PlaygroundOptions"
+          component={Playground}
+          options={{
+            title: '',
+            headerStyle: {
+              backgroundColor: '#51829B',
+            },
+            headerTintColor: '#000',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Reanimated1"
+          component={Reanimated1}
+          options={{
+            headerShown: true,
             animationEnabled: false,
             animationTypeForReplace: 'pop',
           }}

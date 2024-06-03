@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {Colors} from '../../assets/colors';
 import {getAuthorization} from '../redux/Action';
+import qs from 'qs';
 import {SpotifySVG, GoogleSVG, FacebookSVG, PhoneSVG} from '../../assets/svgs';
 
 const Login = ({navigation}) => {
@@ -114,6 +115,15 @@ const Login = ({navigation}) => {
           activeOpacity={0.8}
           onPress={() => navigation.navigate('Home Page', {token: token})}>
           <Text style={styles.logInText}>Skip</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.logInButton}
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate('PlaygroundOptions')}>
+          <Text style={styles.logInText}>Playground</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

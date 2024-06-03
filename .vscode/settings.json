@@ -1,0 +1,17 @@
+{
+  "colorize.hide_current_line_decorations": false,
+  "colorize.languages": [
+    "javascript"
+    "js",
+    "css",
+    "sass",
+    "scss",
+    "less",
+    "postcss",
+    "sss",
+    "stylus",
+    "xml",
+    "svg",
+    "ts",
+  ]
+}

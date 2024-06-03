@@ -1,0 +1,56 @@
+import React, {useEffect, useState, useRef} from 'react';
+import { Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
+import LottieView from 'lottie-react-native';
+
+export const Lottie = () => {
+  const [enabled, setEnabled] = useState(true);
+  const switchRef = useRef();
+  
+  const toggleSwitch = () => {
+    enabled ? switchRef?.current?.play(0,72) : switchRef?.current?.play(72,0)
+    setEnabled(!enabled);
+  } 
+  return(
+    <View style={[styles.main, {backgroundColor: enabled ? '#FAF9F6' : 'black',}]}>
+      <StatusBar barStyle={'dark-content'}/>
+        <Pressable onPress={toggleSwitch}>
+          <LottieView
+            source={require('../../assets/lottie/switchAnimation.json')}
+            autoPlay={false}
+            loop={false}
+            ref={switchRef}
+            speed={5}
+            style={styles.switchAnimation}
+          />
+        </Pressable>
+        <LottieView
+          source={require('../../assets/lottie/hello.json')}
+          autoPlay={true}
+          loop={true}
+          style={styles.playbackAnimation}
+        />
+      <Text style={styles.text}>Let's look at Lottie Animations</Text>
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 25,
+  },
+  playbackAnimation: {
+    height: 200,
+    width: 200,
+    alignSelf: 'center',
+  },
+  switchAnimation: {
+    height: 80,
+    width: 80,
+    backgroundColor: '#FAF9F6',
+  }
+})
