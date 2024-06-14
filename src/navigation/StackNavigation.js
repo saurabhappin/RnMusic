@@ -11,6 +11,8 @@ import Home from '../screens/HomeScreen';
 import { Lottie } from '../screens/LottieAnimations';
 import { Playground } from '../screens/playgroundOptions';
 import { Reanimated1 } from '../screens/Reanimated1';
+import { MovingBall } from '../screens/MovingBall';
+import { Timer } from '../screens/Timer';
 
 const Stack = createNativeStackNavigator();
 
@@ -62,6 +64,29 @@ export default function StackNavigationManager() {
             headerShown: true,
             animationEnabled: false,
             animationTypeForReplace: 'pop',
+          }}
+        />
+        <Stack.Screen
+          name="MovingBall"
+          component={MovingBall}
+          options={{
+            headerShown: true,
+            animationEnabled: false,
+            animationTypeForReplace: 'pop',
+          }}
+        />
+        <Stack.Screen
+          name="Timer"
+          component={Timer}
+          options={{
+            title: '',
+            headerStyle: {
+              backgroundColor: '#51829B',
+            },
+            headerTintColor: '#000',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
           }}
         />
       </Stack.Navigator>

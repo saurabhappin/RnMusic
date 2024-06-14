@@ -11,6 +11,12 @@ export const Playground = ({navigation}) => {
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Reanimated1')}>
         <Text style={styles.buttonText}>Reanimated</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('MovingBall')}>
+        <Text style={styles.buttonText}>Moving Ball</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Timer')}>
+        <Text style={styles.buttonText}>Timer</Text>
+      </TouchableOpacity>
     </View>
   );
 };
