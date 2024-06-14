@@ -6,12 +6,14 @@ export const Timer = () => {
   const [timeLeft, setTimeLeft] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [isStart, setIsStart] = useState(false);
+  const [initialRun, setInitialRun] = useState(false);
 
   useEffect(() => {
     let timer = null;
     if (isRunning && timeLeft > 0) {
       timer = setInterval(() => {
         setTimeLeft((prevTime) => prevTime - 1);
+        console.log('running');
       }, 1000);
     } else if (timeLeft === 0) {
       clearInterval(timer);
@@ -24,7 +26,8 @@ export const Timer = () => {
   }, [isRunning, timeLeft]);
 
   const startTimer = () => {
-    const time = parseInt(inputTime);
+    setInitialRun(!initialRun);
+    const time = initialRun ? parseInt(inputTime) : parseInt(timeLeft);
     if (isNaN(time) || time <= 0) {
       Alert.alert('Please enter a valid number');
       return;
