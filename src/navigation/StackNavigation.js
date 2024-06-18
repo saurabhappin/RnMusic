@@ -13,6 +13,7 @@ import { Playground } from '../screens/playgroundOptions';
 import { Reanimated1 } from '../screens/Reanimated1';
 import { MovingBall } from '../screens/MovingBall';
 import { Timer } from '../screens/Timer';
+import { TimerClass } from '../screens/TimerClass';
 
 const Stack = createNativeStackNavigator();
 
@@ -78,6 +79,20 @@ export default function StackNavigationManager() {
         <Stack.Screen
           name="Timer"
           component={Timer}
+          options={{
+            title: '',
+            headerStyle: {
+              backgroundColor: '#51829B',
+            },
+            headerTintColor: '#000',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="TimerClass"
+          component={TimerClass}
           options={{
             title: '',
             headerStyle: {

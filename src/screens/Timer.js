@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Alert } from "react-native"
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from "react-native";
+
+const CustomButton = (props) => {
+  return(
+    <TouchableOpacity title={props.title} onPress={props.onPress} style={props.style} disabled={props.disabled}>
+      {props.children}
+    </TouchableOpacity>
+  )
+}
 
 export const Timer = () => {
   const [inputTime, setInputTime] = useState('');
@@ -68,15 +76,15 @@ export const Timer = () => {
         onChangeText={setInputTime}
       />
       <View style={styles.buttonContainer}>
-        <TouchableOpacity title="Start" onPress={startTimer} style={[styles.startButton, {backgroundColor: isStart ? 'grey' : '#79AC78'} ]} disabled={isStart}>
+        <CustomButton title="Start" onPress={startTimer} style={[styles.startButton, {backgroundColor: isStart ? 'grey' : '#79AC78'} ]} disabled={isStart}>
           <Text style={[styles.buttonText, isStart ? {color: 'lightgrey'} : {}]}>Start</Text>
-        </TouchableOpacity>
-        <TouchableOpacity title="Stop" onPress={stopTimer} style={styles.stopButton} >
+        </CustomButton>
+        <CustomButton title="Stop" onPress={stopTimer} style={styles.stopButton} >
           <Text style={styles.buttonText}>Stop</Text>
-        </TouchableOpacity>
-        <TouchableOpacity title="Reset" onPress={resetTimer} style={styles.resetButton}>
+        </CustomButton>
+        <CustomButton title="Reset" onPress={resetTimer} style={styles.resetButton}>
           <Text style={styles.buttonText}>Reset</Text>
-        </TouchableOpacity>
+        </CustomButton>
       </View>
     </View>
   );

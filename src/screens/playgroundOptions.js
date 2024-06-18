@@ -17,6 +17,9 @@ export const Playground = ({navigation}) => {
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Timer')}>
         <Text style={styles.buttonText}>Timer</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TimerClass')}>
+        <Text style={styles.buttonText}>Timer Class</Text>
+      </TouchableOpacity>
     </View>
   );
 };
