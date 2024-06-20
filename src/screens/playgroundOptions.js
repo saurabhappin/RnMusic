@@ -1,25 +1,64 @@
-import React, {useEffect, useState, useRef} from 'react';
-import { Pressable, StatusBar, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+import React, { useContext } from 'react';
+import { TouchableOpacity, StyleSheet, Text, View, FlatList, Dimensions } from "react-native";
+import { ThemeContext } from '../components/ThemeContext';
 
-export const Playground = ({navigation}) => {
+const buttonData = [
+  {
+    id: 0,
+    key: 'Animation',
+    title: 'Lottie',
+  },
+  {
+    id: 1,
+    key: 'Reanimated1',
+    title: 'Reanimated',
+  },
+  {
+    id: 2,
+    key: 'MovingBall',
+    title: 'Moving Ball',
+  },
+  {
+    id: 3,
+    key: 'Timer',
+    title: 'Timer',
+  },
+  {
+    id: 4,
+    key: 'TimerClass',
+    title: 'Timer Class',
+  },
+  {
+    id: 5,
+    key: 'ToDoList',
+    title: 'To Do List',
+  },
+];
+
+const RenderItems = ({ item }) => {
+  const navigation = useNavigation();
+  const { isDarkMode } = useContext(ThemeContext);
   
-  return(
-    <View style={styles.main}>
-      <TouchableOpacity onPress={() => navigation.navigate('Animation')} style={styles.button}>
-        <Text style={styles.buttonText}>Lottie</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Reanimated1')}>
-        <Text style={styles.buttonText}>Reanimated</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('MovingBall')}>
-        <Text style={styles.buttonText}>Moving Ball</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Timer')}>
-        <Text style={styles.buttonText}>Timer</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TimerClass')}>
-        <Text style={styles.buttonText}>Timer Class</Text>
-      </TouchableOpacity>
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate(item.key)} style={[styles.button, isDarkMode && styles.buttonDark]}>
+      <Text style={[styles.buttonText, isDarkMode && styles.buttonTextDark]}>{item.title}</Text>
+    </TouchableOpacity>
+  );
+}
+
+export const Playground = () => {
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  
+  return (
+    <View style={[styles.main, isDarkMode && styles.mainDark]}>
+      <FlatList
+        data={buttonData}
+        numColumns={2}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.list}
+        renderItem={({ item }) => <RenderItems item={item} />}
+      />
     </View>
   );
 };
@@ -28,35 +67,34 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     paddingHorizontal: 8,
-    paddingVertical: 8,
+    paddingVertical: 15,
+    alignItems: 'center',
   },
-  text: {
-    fontSize: 25,
-  },
-  playbackAnimation: {
-    height: 200,
-    width: 200,
-    alignSelf: 'center',
-  },
-  switchAnimation: {
-    height: 80,
-    width: 80,
-    backgroundColor: '#FAF9F6',
+  mainDark: {
+    backgroundColor: '#222831',
   },
   button: {
     backgroundColor: '#F6995C',
-    height:40,
-    width: 150,
+    height: 40,
+    width: '47%',
     padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 10,
-    marginBottom: 8,
+    alignSelf: 'center',
+    borderRadius: 6,
+    marginHorizontal: 5,
+    marginBottom: 10,
+  },
+  buttonDark: {
+    backgroundColor: '#31363F',
   },
   buttonText: {
     fontSize: 16,
     color: '#000',
     letterSpacing: 0.8,
-    fontWeight: 'bold'
-  }
-})
+    fontWeight: 'bold',
+  },
+  buttonTextDark: {
+    color: '#FFF',
+  },
+});

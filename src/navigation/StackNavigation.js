@@ -14,6 +14,8 @@ import { Reanimated1 } from '../screens/Reanimated1';
 import { MovingBall } from '../screens/MovingBall';
 import { Timer } from '../screens/Timer';
 import { TimerClass } from '../screens/TimerClass';
+import ToDoList from '../screens/ToDoList';
+import ThemeSwitch from '../components/ThemeSwitch';
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +58,7 @@ export default function StackNavigationManager() {
             headerTitleStyle: {
               fontWeight: 'bold',
             },
+            headerRight:() => <ThemeSwitch />
           }}
         />
         <Stack.Screen
@@ -102,6 +105,21 @@ export default function StackNavigationManager() {
             headerTitleStyle: {
               fontWeight: 'bold',
             },
+          }}
+        />
+        <Stack.Screen
+          name="ToDoList"
+          component={ToDoList}
+          options={{
+            title: '',
+            headerStyle: {
+              backgroundColor: '#51829B',
+            },
+            headerTintColor: '#000',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerRight:() => <ThemeSwitch />
           }}
         />
       </Stack.Navigator>
