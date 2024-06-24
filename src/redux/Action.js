@@ -67,3 +67,17 @@ export const getAuthorization = () => {
 //       .catch(err => console.log(err));
 //   };
 // };
+
+export const fetchProducts = async () => {
+  try {
+    const response = await axios.get('https://dummyjson.com/products/category/smartphones');
+    console.log('Product api response ======>', response?.data?.products);
+    dispatch({
+      type: 'ProductDetails',
+      data: response?.data?.products,
+    })
+    // setProducts(response.data.products);
+  } catch (error) {
+    console.error(error);
+  }
+};

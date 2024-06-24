@@ -5,7 +5,8 @@ export const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'getAuthorization':
       return {...state, data: action.data};
-
+    case 'ProductDetails':
+      return {...state, data: action.data}
     default:
       return state;
   }

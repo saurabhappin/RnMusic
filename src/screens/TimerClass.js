@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert, Dimensions } from "react-native";
+import { ThemeContext } from '../components/ThemeContext';
 
 class CustomButton extends Component {
   render() {
@@ -17,6 +18,8 @@ class CustomButton extends Component {
 }
 
 export class TimerClass extends Component {
+  static contextType = ThemeContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -81,9 +84,12 @@ export class TimerClass extends Component {
   };
 
   render() {
+    const { isDarkMode } = this.context;
+    const styles = isDarkMode ? darkStyles : lightStyles;
+
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Timer</Text>
+        <Text style={styles.title}>Timer*</Text>
         <Text style={styles.timer}>
           {`${this.formatTime(this.state.timeLeft)}`}
         </Text>
@@ -93,6 +99,7 @@ export class TimerClass extends Component {
           keyboardType="numeric"
           value={this.state.inputTime}
           onChangeText={(text) => this.setState({ inputTime: text })}
+          placeholderTextColor={isDarkMode ? '#ccc' : 'grey'}
         />
         <View style={styles.buttonContainer}>
           <CustomButton
@@ -109,12 +116,15 @@ export class TimerClass extends Component {
             <Text style={styles.buttonText}>Reset</Text>
           </CustomButton>
         </View>
+        <View style={styles.disclaimerContainer}>
+          <Text style={styles.disclaimer}>* Put together using class-based components</Text>
+        </View>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const lightStyles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
@@ -177,4 +187,85 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     fontSize: 40,
   },
+  disclaimerContainer: {
+    position: 'absolute',
+    top: Dimensions.get('window').height * 0.85,
+  },
+  disclaimer: {},
+});
+
+const darkStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#222831',
+  },
+  title: {
+    fontSize: 60,
+    fontFamily: '800',
+    marginBottom: '30%',
+    color: '#FFFFFF',
+  },
+  input: {
+    height: 40,
+    borderColor: '#31363F',
+    borderWidth: 1,
+    borderRadius: 6,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+    width: '80%',
+    textAlign: 'center',
+    color: '#FFFFFF',
+    backgroundColor: '#31363F',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '80%',
+  },
+  startButton: {
+    flex: 0.33,
+    backgroundColor: '#79AC78',
+    height: 40,
+    width: 80,
+    borderRadius: 5,
+    justifyContent: 'center'
+  },
+  stopButton: {
+    flex: 0.33,
+    marginHorizontal: 10,
+    backgroundColor: '#EF4B4B',
+    height: 40,
+    width: 80,
+    borderRadius: 5,
+    justifyContent: 'center'
+  },
+  resetButton: {
+    flex: 0.33,
+    backgroundColor: '#FFCF81',
+    height: 40,
+    width: 80,
+    borderRadius: 5,
+    justifyContent: 'center'
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 28,
+    fontWeight: 'bold',
+    letterSpacing: 1.5,
+    alignSelf: 'center',
+  },
+  timer: {
+    marginVertical: 20,
+    fontSize: 40,
+    color: '#FFFFFF',
+  },
+  disclaimerContainer: {
+    position: 'absolute',
+    top: Dimensions.get('window').height * 0.85,
+  },
+  disclaimer: {
+    color: '#fff',
+  }
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from "react";
 // import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -16,10 +16,31 @@ import { Timer } from '../screens/Timer';
 import { TimerClass } from '../screens/TimerClass';
 import ToDoList from '../screens/ToDoList';
 import ThemeSwitch from '../components/ThemeSwitch';
+import HeaderBackButton from '../components/BackButton';
+import { ThemeContext } from '../components/ThemeContext';
+import ProductListScreen from "../screens/ProductListing";
+import WishlistScreen from "../screens/Wishlist";
+import WishlistButton from "../components/WishlistButton";
 
 const Stack = createNativeStackNavigator();
 
+
+// import { createDrawerNavigator } from '@react-navigation/drawer';
+
+// const Drawer = createDrawerNavigator();
+
+// function MyDrawer() {
+//   return (
+//     <Drawer.Navigator>
+//       <Drawer.Screen name="PlaygroundOptions" component={Playground} />
+//       <Drawer.Screen name="Reanimated1" component={Reanimated1} />
+//     </Drawer.Navigator>
+//   );
+// }
+
 export default function StackNavigationManager() {
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  const backgroundColor = isDarkMode ? '#395b6c' : '#338cb9' ;
   return (
     <NavigationContainer>
       <Stack.Navigator shifting={false}>
@@ -41,9 +62,16 @@ export default function StackNavigationManager() {
           name="Animation"
           component={Lottie}
           options={{
-            headerShown: true,
-            animationEnabled: false,
-            animationTypeForReplace: 'pop',
+            title: '',
+            headerStyle: {
+              backgroundColor: backgroundColor,
+            },
+            headerTintColor: '#000',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerLeft: () => <HeaderBackButton />,
+            headerRight:() => <ThemeSwitch />
           }}
         />
         <Stack.Screen
@@ -52,12 +80,13 @@ export default function StackNavigationManager() {
           options={{
             title: '',
             headerStyle: {
-              backgroundColor: '#51829B',
+              backgroundColor: backgroundColor,
             },
             headerTintColor: '#000',
             headerTitleStyle: {
               fontWeight: 'bold',
             },
+            headerLeft: () => <HeaderBackButton />,
             headerRight:() => <ThemeSwitch />
           }}
         />
@@ -65,18 +94,32 @@ export default function StackNavigationManager() {
           name="Reanimated1"
           component={Reanimated1}
           options={{
-            headerShown: true,
-            animationEnabled: false,
-            animationTypeForReplace: 'pop',
+            title: '',
+            headerStyle: {
+              backgroundColor: backgroundColor,
+            },
+            headerTintColor: '#000',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerLeft: () => <HeaderBackButton />,
+            headerRight:() => <ThemeSwitch />
           }}
         />
         <Stack.Screen
           name="MovingBall"
           component={MovingBall}
           options={{
-            headerShown: true,
-            animationEnabled: false,
-            animationTypeForReplace: 'pop',
+            title: '',
+            headerStyle: {
+              backgroundColor: backgroundColor,
+            },
+            headerTintColor: '#000',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerLeft: () => <HeaderBackButton />,
+            headerRight:() => <ThemeSwitch />
           }}
         />
         <Stack.Screen
@@ -85,12 +128,14 @@ export default function StackNavigationManager() {
           options={{
             title: '',
             headerStyle: {
-              backgroundColor: '#51829B',
+              backgroundColor: backgroundColor,
             },
             headerTintColor: '#000',
             headerTitleStyle: {
               fontWeight: 'bold',
             },
+            headerLeft: () => <HeaderBackButton />,
+            headerRight:() => <ThemeSwitch />
           }}
         />
         <Stack.Screen
@@ -99,12 +144,14 @@ export default function StackNavigationManager() {
           options={{
             title: '',
             headerStyle: {
-              backgroundColor: '#51829B',
+              backgroundColor: backgroundColor,
             },
             headerTintColor: '#000',
             headerTitleStyle: {
               fontWeight: 'bold',
             },
+            headerLeft: () => <HeaderBackButton />,
+            headerRight:() => <ThemeSwitch />
           }}
         />
         <Stack.Screen
@@ -113,16 +160,50 @@ export default function StackNavigationManager() {
           options={{
             title: '',
             headerStyle: {
-              backgroundColor: '#51829B',
+              backgroundColor: backgroundColor,
             },
             headerTintColor: '#000',
             headerTitleStyle: {
               fontWeight: 'bold',
             },
+            headerLeft: () => <HeaderBackButton />,
+            headerRight:() => <ThemeSwitch />
+          }}
+        />
+        <Stack.Screen
+          name="ProductList"
+          component={ProductListScreen}
+          options={{
+            title: '',
+            headerStyle: {
+              backgroundColor: backgroundColor,
+            },
+            headerTintColor: '#000',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerLeft: () => <HeaderBackButton />,
+            headerRight:() => <WishlistButton />
+          }}
+        />
+        <Stack.Screen
+          name="Wishlist"
+          component={WishlistScreen}
+          options={{
+            title: '',
+            headerStyle: {
+              backgroundColor: backgroundColor,
+            },
+            headerTintColor: '#000',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerLeft: () => <HeaderBackButton />,
             headerRight:() => <ThemeSwitch />
           }}
         />
       </Stack.Navigator>
+      {/* <MyDrawer /> */}
     </NavigationContainer>
   );
 }
