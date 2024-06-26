@@ -3,11 +3,11 @@ import { Pressable, StatusBar, StyleSheet, Text, View } from "react-native";
 import LottieView from 'lottie-react-native';
 
 export const Lottie = () => {
-  const [enabled, setEnabled] = useState(true);
+  const [enabled, setEnabled] = useState(false);
   const switchRef = useRef();
   
   const toggleSwitch = () => {
-    enabled ? switchRef?.current?.play(0,72) : switchRef?.current?.play(72,0)
+    enabled ? switchRef?.current?.play(0,90) : switchRef?.current?.play(90,180)
     setEnabled(!enabled);
   } 
   return(
@@ -19,7 +19,7 @@ export const Lottie = () => {
             autoPlay={false}
             loop={false}
             ref={switchRef}
-            speed={5}
+            speed={4}
             style={styles.switchAnimation}
           />
         </Pressable>
@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
   switchAnimation: {
     height: 80,
     width: 80,
-    backgroundColor: '#FAF9F6',
+    backgroundColor: 'transparent',
   }
 })

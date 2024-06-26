@@ -21,6 +21,7 @@ import { ThemeContext } from '../components/ThemeContext';
 import ProductListScreen from "../screens/ProductListing";
 import WishlistScreen from "../screens/Wishlist";
 import WishlistButton from "../components/WishlistButton";
+import { DynamicBox } from "../screens/DynamicBox";
 
 const Stack = createNativeStackNavigator();
 
@@ -189,6 +190,22 @@ export default function StackNavigationManager() {
         <Stack.Screen
           name="Wishlist"
           component={WishlistScreen}
+          options={{
+            title: '',
+            headerStyle: {
+              backgroundColor: backgroundColor,
+            },
+            headerTintColor: '#000',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerLeft: () => <HeaderBackButton />,
+            headerRight:() => <ThemeSwitch />
+          }}
+        />
+        <Stack.Screen
+          name="DynamicBox"
+          component={DynamicBox}
           options={{
             title: '',
             headerStyle: {

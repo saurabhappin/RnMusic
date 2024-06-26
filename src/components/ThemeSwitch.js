@@ -1,11 +1,18 @@
-import React, { useContext } from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useContext, useRef } from 'react';
+import { StyleSheet, Pressable } from 'react-native';
 import { Switch } from 'react-native-switch';
 import { ThemeContext } from './ThemeContext';
+import LottieView from 'lottie-react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const ThemeSwitch = () => {
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  const switchRef = useRef();
+  
+  const toggleSwitch = () => {
+    isDarkMode ? switchRef?.current?.play(90,180) : switchRef?.current?.play(0,90)
+    toggleTheme(!isDarkMode);
+  } 
   return (
     <Switch
       value={isDarkMode}
@@ -23,6 +30,17 @@ const ThemeSwitch = () => {
       switchRightPx={4}
       renderInsideCircle={() => (isDarkMode ? <Icon name="moon" size={20} color="#333" /> : <Icon name="sunny" size={20} color="white" />)}
     />
+    // <Pressable onPress={toggleSwitch}>
+    //   <LottieView
+    //     source={require('../../assets/lottie/switchAnimation.json')}
+    //     autoPlay={false}
+    //     loop={false}
+    //     ref={switchRef}
+    //     speed={4}
+    //     style={styles.switchAnimation}
+
+    //   />
+    // </Pressable>
   );
 };
 
@@ -43,8 +61,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   switchAnimation: {
-    height: 60,
+    height: 90,
     width: 60,
-    backgroundColor: 'red',
+    bottom: 20,
+    left: 10,
+    // backgroundColor: 'transparent',
   }
 })

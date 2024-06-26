@@ -46,7 +46,13 @@ const buttonData = [
     key: 'ProductList',
     title: 'Products',
     iconName: 'basket',
-  }
+  },
+  {
+    id: 7,
+    key: 'DynamicBox',
+    title: 'Dynamic Box',
+    iconName: 'cube',
+  },
 ];
 
 const RenderItems = ({ item }) => {
