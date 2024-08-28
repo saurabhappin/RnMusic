@@ -28,22 +28,31 @@ export const DynamicBox = React.memo(() => {
   const handlePress = () => {
     const newColor = generateColor();
     const newSize = getRandomSize(40, 200);
-    console.log('##############', newSize);
     const newTranslateX = Math.floor(Math.random() * (width - newSize));
-    const newTranslateY = Math.floor(Math.random() * (height - insets.top - insets.bottom - 1.1*newSize));
+    const newTranslateY = Math.floor(Math.random() * (height - insets.top - insets.bottom - 1.2*newSize));
 
     translateX.value = newTranslateX;
     translateY.value = newTranslateY;
     color.value = newColor;
     size.value = newSize;
-    console.log('0000000000000', newTranslateX, translateX.value);
-    console.log('1111111111111', newColor);
   };
 
   const animatedStyles = useAnimatedStyle(() => ({
     transform: [
-      { translateX: withSpring(translateX.value) },
-      { translateY: withSpring(translateY.value) },
+      { translateX: withSpring(translateX.value, {
+        dampingRatio: 0.7,
+        stiffness: 23,
+        overshootClamping: false,
+        restDisplacementThreshold: 0.01,
+        restSpeedThreshold: 150,
+      }) },
+      { translateY: withSpring(translateY.value, {
+        dampingRatio: 0.7,
+        stiffness: 23,
+        overshootClamping: false,
+        restDisplacementThreshold: 0.01,
+        restSpeedThreshold: 150,
+      }) },
     ],
     width: size.value,
     height: size.value,
