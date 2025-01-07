@@ -23,9 +23,9 @@ import {
   ShuffleIcon,
   WhitePauseIcon,
   WhitePlayIcon,
-} from '../../assets/svgs';
-import {Colors} from '../../assets/colors';
-import {SampleSongs} from '../../assets/songs/SampleSongs';
+} from '../assets/svgs';
+import {Colors} from '../assets/colors';
+import {SampleSongs} from '../assets/songs/SampleSongs';
 import TrackPlayer, {
   Capability,
   State,
@@ -35,7 +35,7 @@ import TrackPlayer, {
 import LottieView from 'lottie-react-native';
 import Player from './Player';
 
-const backgroundImage = require('../../assets/images/ScreenBG.png');
+const backgroundImage = require('../assets/images/ScreenBG.png');
 
 const Playlist = ({navigation}) => {
   const [songIndex, setSongIndex] = useState(0);
@@ -50,7 +50,7 @@ const Playlist = ({navigation}) => {
     url: 'https://api.spotify.com/v1/playlists/4n0MZ8Kix8frGO3C1LF1gX?market=IN',
     headers: {
       Authorization:
-        'Bearer BQCnRzuN8g1kh6C3SXoinIT_JTPzUremOSTUqulZ2dLqkBhmnwdj7Kqftlndy50b2uroJtqLB1rQMT5Iwr0wEU7tg3MP1eDZ0Z9sdcVRDQHrTnnbi0o',
+        'Bearer BQDvQK5kPz1LBl2TW7HiRj3fxQOjzSCTBgrASuI9P2tn5ZFEtRpTczfr_rioJXqTHAZyhAjcY8aTjSZuNmY8U8QeoR77dY4gX4eiQ09ebvUJnWq8r-w',
     },
   };
 
@@ -110,103 +110,103 @@ const Playlist = ({navigation}) => {
       resizeMode="cover"
       style={styles.bg}>
       <SafeAreaView>
-        <ScrollView>
-          <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-            <LeftIcon height={50} width={50} fill={'white'} />
-          </TouchableOpacity>
-          <View style={styles.upperSearchBar}>
-            <SearchIcon height={20} width={20} fill={'white'} />
-            <TextInput
-              placeholder="Find in playlist"
-              placeholderTextColor={'white'}
-              style={styles.TextInput}
-              inpu
-            />
-          </View>
-          <Image
-            source={{uri: SampleSongs[songIndex].artwork}}
-            style={styles.imageStyle}
-          />
-          <View style={styles.subContainer}>
-            <View style={styles.subContainerLeft}>
-              <MusicIcon fill={'white'} />
-              <Text style={styles.subHeading}>Chill-time Playlist</Text>
-            </View>
-            <View style={styles.subContainerRight}>
-              <TouchableOpacity>
-                <ShuffleIcon height={25} weight={25} fill={'white'} />
-              </TouchableOpacity>
+        <FlatList
+          bounces={false}
+          data={SampleSongs}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{paddingBottom: isPlayerBarVisible ? '24%' : '12%'}}
+          ListHeaderComponent={() => {
+            return(
+              <><TouchableOpacity onPress={() => navigation.navigate('Search')}>
+                <LeftIcon height={50} width={50} fill={'white'} />
+              </TouchableOpacity><View style={styles.upperSearchBar}>
+                  <SearchIcon height={20} width={20} fill={'white'} />
+                  <TextInput
+                    placeholder="Find in playlist"
+                    placeholderTextColor={'white'}
+                    style={styles.TextInput}
+                    inpu />
+                </View><Image
+                  source={{ uri: SampleSongs[songIndex].artwork }}
+                  style={styles.imageStyle} /><View style={styles.subContainer}>
+                  <View style={styles.subContainerLeft}>
+                    <MusicIcon fill={'white'} />
+                    <Text style={styles.subHeading}>Chill-time Playlist</Text>
+                  </View>
+                  <View style={styles.subContainerRight}>
+                    <TouchableOpacity>
+                      <ShuffleIcon height={25} weight={25} fill={'white'} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      activeOpacity={0.8}
+                      onPress={async () => {
+                        setIsPlayerBarVisible(true);
+                        if (State.Playing === playState) {
+                          await TrackPlayer.pause();
+                        } else {
+                          await TrackPlayer.skip(songIndex);
+                          await TrackPlayer.play();
+                        }
+                      } }>
+                      {State.Playing === playState ? (
+                        <PauseIcon height={50} weight={50} fill={'#4daf50'} />
+                      ) : (
+                        <PlayIcon height={50} weight={50} fill={'#4daf50'} />
+                      )}
+                    </TouchableOpacity>
+                  </View>
+                </View></>
+            );
+          }}
+          renderItem={({item, index}) => {
+            return (
               <TouchableOpacity
-                activeOpacity={0.8}
+                style={styles.listButton}
                 onPress={async () => {
                   setIsPlayerBarVisible(true);
-                  if (State.Playing === playState) {
-                    await TrackPlayer.pause();
-                  } else {
-                    await TrackPlayer.skip(songIndex);
-                    await TrackPlayer.play();
-                  }
+                  await TrackPlayer.pause();
+                  await TrackPlayer.skip(index);
+                  await TrackPlayer.play();
+                  setSongIndex(index);
                 }}>
-                {State.Playing === playState ? (
-                  <PauseIcon height={50} weight={50} fill={'#4daf50'} />
-                ) : (
-                  <PlayIcon height={50} weight={50} fill={'#4daf50'} />
-                )}
-              </TouchableOpacity>
-            </View>
-          </View>
-          <FlatList
-            data={SampleSongs}
-            renderItem={({item, index}) => {
-              return (
-                <TouchableOpacity
-                  style={styles.listButton}
-                  onPress={async () => {
-                    setIsPlayerBarVisible(true);
-                    await TrackPlayer.pause();
-                    await TrackPlayer.skip(index);
-                    await TrackPlayer.play();
-                    setSongIndex(index);
-                  }}>
-                  <View style={styles.songContainer}>
-                    <Image
-                      source={{uri: item.artwork}}
-                      style={styles.listImage}
-                    />
-                    <View style={styles.songTextContainer}>
-                      <View style={styles.songTextLeft}>
-                        <Text
-                          style={[
-                            styles.songTitle,
-                            {
-                              color:
-                                index === songIndex &&
-                                State.Playing === playState
-                                  ? Colors.spotify
-                                  : Colors.white,
-                            },
-                          ]}>
-                          {item.title}
-                        </Text>
-                        <Text style={styles.songAuthor}>{item.artist}</Text>
-                      </View>
-                      <View style={styles.songTextRight}>
-                        {index === songIndex && State.Playing === playState && (
-                          <LottieView
-                            source={require('../../assets/lottie/playback.json')}
-                            autoPlay={true}
-                            loop={true}
-                            style={styles.playbackAnimation}
-                          />
-                        )}
-                      </View>
+                <View style={styles.songContainer}>
+                  <Image
+                    source={{uri: item.artwork}}
+                    style={styles.listImage}
+                  />
+                  <View style={styles.songTextContainer}>
+                    <View style={styles.songTextLeft}>
+                      <Text
+                        style={[
+                          styles.songTitle,
+                          {
+                            color:
+                              index === songIndex &&
+                              State.Playing === playState
+                                ? Colors.spotify
+                                : Colors.white,
+                          },
+                        ]}>
+                        {item.title}
+                      </Text>
+                      <Text style={styles.songAuthor}>{item.artist}</Text>
+                    </View>
+                    <View style={styles.songTextRight}>
+                      {index === songIndex && State.Playing === playState && (
+                        <LottieView
+                          source={require('../assets/lottie/playback.json')}
+                          autoPlay={true}
+                          loop={true}
+                          style={styles.playbackAnimation}
+                        />
+                      )}
                     </View>
                   </View>
-                </TouchableOpacity>
-              );
-            }}
-          />
-        </ScrollView>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+        />
         {isPlayerBarVisible && (
           <View style={styles.playerBarContainer}>
             <TouchableOpacity

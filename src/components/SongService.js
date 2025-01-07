@@ -2,28 +2,39 @@ import TrackPlayer from 'react-native-track-player';
 
 module.exports = async function () {
   try {
-    TrackPlayer.addEventListener('remote-play', () => {
+    TrackPlayer.addEventListener(TrackPlayer.Events.RemotePlay, () => {
       TrackPlayer.play();
     });
 
-    TrackPlayer.addEventListener('remote-pause', () => {
+    TrackPlayer.addEventListener(TrackPlayer.Events.RemotePause, () => {
       TrackPlayer.pause();
     });
 
-    TrackPlayer.addEventListener('remote-next', () => {
+    TrackPlayer.addEventListener(TrackPlayer.Events.RemoteNext, () => {
       TrackPlayer.skipToNext();
     });
 
-    TrackPlayer.addEventListener('remote-previous', () => {
+    TrackPlayer.addEventListener(TrackPlayer.Events.RemotePrevious, () => {
       TrackPlayer.skipToPrevious();
     });
 
-    TrackPlayer.addEventListener('remote-stop', () => {
-      TrackPlayer.destroy();
+    TrackPlayer.addEventListener(TrackPlayer.Events.RemoteStop, () => {
+      TrackPlayer.reset(); 
     });
 
-    TrackPlayer.addEventListener('remote-seek', () => {
-      TrackPlayer.seekTo();
+    TrackPlayer.addEventListener(TrackPlayer.Events.RemoteSeek, (position) => {
+      TrackPlayer.seekTo(position); 
     });
-  } catch (error) {}
+
+    TrackPlayer.addEventListener(TrackPlayer.Events.PlaybackState, (state) => {
+      console.log('Playback state:', state);
+    });
+
+    TrackPlayer.addEventListener(TrackPlayer.Events.PlaybackError, (error) => {
+      console.error('Playback error:', error);
+    });
+
+  } catch (error) {
+    console.error('Error setting up TrackPlayer:', error);
+  }
 };

@@ -20,9 +20,9 @@ import {
   PauseIcon,
   PlayIcon,
   PreviousIcon,
-} from '../../assets/svgs';
-import {Colors} from '../../assets/colors';
-const backgroundImage = require('../../assets/images/playerbg.png');
+} from '../assets/svgs';
+import {Colors} from '../assets/colors';
+const backgroundImage = require('../assets/images/playerbg.png');
 
 const Player = ({
   SampleSongs,

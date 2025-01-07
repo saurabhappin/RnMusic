@@ -8,10 +8,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {Colors} from '../../assets/colors';
+import {Colors} from '../assets/colors';
 import {getAuthorization} from '../redux/Action';
 import qs from 'qs';
-import {SpotifySVG, GoogleSVG, FacebookSVG, PhoneSVG} from '../../assets/svgs';
+import {SpotifySVG, GoogleSVG, FacebookSVG, PhoneSVG} from '../assets/svgs';
 
 const Login = ({navigation}) => {
   const [token, setToken] = useState('');

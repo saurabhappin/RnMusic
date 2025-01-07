@@ -15,7 +15,7 @@ export const Lottie = () => {
       <StatusBar barStyle={'dark-content'}/>
         <Pressable onPress={toggleSwitch}>
           <LottieView
-            source={require('../../assets/lottie/switchAnimation.json')}
+            source={require('../assets/lottie/switchAnimation.json')}
             autoPlay={false}
             loop={false}
             ref={switchRef}
@@ -24,7 +24,7 @@ export const Lottie = () => {
           />
         </Pressable>
         <LottieView
-          source={require('../../assets/lottie/hello.json')}
+          source={require('../assets/lottie/hello.json')}
           autoPlay={true}
           loop={true}
           style={styles.playbackAnimation}

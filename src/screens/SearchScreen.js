@@ -12,10 +12,10 @@ import {
   FlatList,
   Dimensions,
 } from 'react-native';
-import {Colors} from '../../assets/colors';
-import {SearchIcon} from '../../assets/svgs';
+import {Colors} from '../assets/colors';
+import {SearchIcon} from '../assets/svgs';
 
-const backgroundImage = require('../../assets/images/ScreenBG.png');
+const backgroundImage = require('../assets/images/ScreenBG.png');
 const Search = ({token}) => {
   const [data, setData] = useState([]);
   let config = {
@@ -42,22 +42,28 @@ const Search = ({token}) => {
       source={backgroundImage}
       resizeMode="cover"
       style={styles.bg}>
-      <ScrollView>
         <SafeAreaView style={styles.main}>
-          <Text style={styles.heading}>Search</Text>
-          <View style={styles.headerContainer}>
-            <SearchIcon height={25} width={25} fill={Colors.gray} />
-            <TextInput
-              placeholder="Artists, songs, or podcasts"
-              style={styles.inputBox}
-            />
-          </View>
-          <Text style={styles.subheading}>Browse all</Text>
           <FlatList
+            bounces={false}
+            showsVerticalScrollIndicator={false}
             numColumns={2}
             key={2}
             data={data}
             keyExtractor={item => item.id}
+            contentContainerStyle={{paddingBottom: '12%'}}
+            ListHeaderComponent={() => {
+              return(
+                <>
+                <Text style={styles.heading}>Search</Text>
+                <View style={styles.headerContainer}>
+                  <SearchIcon height={25} width={25} fill={Colors.gray} />
+                  <TextInput
+                    placeholder="Artists, songs, or podcasts"
+                    style={styles.inputBox} />
+                </View>
+                <Text style={styles.subheading}>Browse all</Text></>
+              );
+            }}
             renderItem={({item}) => {
               return (
                 <View style={styles.listContainer}>
@@ -74,7 +80,6 @@ const Search = ({token}) => {
             }}
           />
         </SafeAreaView>
-      </ScrollView>
     </ImageBackground>
   );
 };

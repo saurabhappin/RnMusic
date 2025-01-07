@@ -30,7 +30,7 @@ export const Reanimated1 = () => {
       <Animated.Text style={[styles.text, animatedText ]}>Hello Reanmiated</Animated.Text>
       <Pressable onPress={toggleSwitch}>
           <LottieView
-            source={require('../../assets/lottie/switchAnimation.json')}
+            source={require('../assets/lottie/switchAnimation.json')}
             autoPlay={false}
             loop={false}
             ref={switchRef}

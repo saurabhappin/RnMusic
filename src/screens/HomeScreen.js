@@ -13,11 +13,11 @@ import {
   FlatList,
   Image,
 } from 'react-native';
-import {Colors} from '../../assets/colors';
-import {RecentSVG, SettingsSVG, BellSVG} from '../../assets/svgs';
-import {SampleSongs} from '../../assets/songs/SampleSongs';
+import {Colors} from '../assets/colors';
+import {RecentSVG, SettingsSVG, BellSVG} from '../assets/svgs';
+import {SampleSongs} from '../assets/songs/SampleSongs';
 
-const backgroundImage = require('../../assets/images/ScreenBG.png');
+const backgroundImage = require('../assets/images/ScreenBG.png');
 function timeOfDay() {
   let hour = new Date().getHours();
   return hour >= 4 && hour <= 11
